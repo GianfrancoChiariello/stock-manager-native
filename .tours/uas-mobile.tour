@@ -1,0 +1,202 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "UAS mobile (First version 18/02/2023 00:57)",
+  "steps": [
+    {
+      "file": "App.tsx",
+      "description": "Se utiliza un \"Provider\" global para abarcar los estados en toda la aplicacion.",
+      "line": 17
+    },
+    {
+      "file": "App.tsx",
+      "description": "Se envuelve la app en un \"Provider\" pero de routes.",
+      "line": 18
+    },
+    {
+      "file": "App.tsx",
+      "description": "Componente para switchear rutas especificas",
+      "line": 19
+    },
+    {
+      "file": "App.tsx",
+      "description": "Cada ruta especifica de la aplicacion",
+      "line": 20
+    },
+    {
+      "file": "screens/Home.tsx",
+      "description": "Imagen de fondo",
+      "line": 8
+    },
+    {
+      "file": "screens/Home.tsx",
+      "description": "Componente atomico",
+      "line": 12
+    },
+    {
+      "file": "screens/Login.tsx",
+      "description": "Se utiliza como una especie de useRouter()",
+      "line": 16
+    },
+    {
+      "file": "screens/Login.tsx",
+      "description": "Flecha de back",
+      "line": 45
+    },
+    {
+      "file": "screens/Login.tsx",
+      "description": "Titulo \"Bienvenido a UAS\"",
+      "line": 50
+    },
+    {
+      "file": "screens/Login.tsx",
+      "description": "Contenedor del formulario",
+      "line": 51
+    },
+    {
+      "file": "screens/SubScreens/MainScreen.tsx",
+      "description": "Se engloba dentro de un sideBar con un {children}",
+      "line": 18
+    },
+    {
+      "file": "screens/SubScreens/MainScreen.tsx",
+      "description": "Y dentro se envia el contenido, en este caso es un box de acciones. ",
+      "line": 19
+    },
+    {
+      "file": "components/SideBar.tsx",
+      "description": "Asi se utiliza el lang:   lang.\"palabra del objeto\"",
+      "line": 91
+    },
+    {
+      "file": "components/SideBar.tsx",
+      "description": "Objeto con un mapeo de rutas para no repetir codigo",
+      "line": 106
+    },
+    {
+      "file": "components/SideBar.tsx",
+      "description": "View una vez visible al abrir el sidebar",
+      "line": 161
+    },
+    {
+      "file": "components/SideBar.tsx",
+      "description": "\"Navbar\" del side",
+      "line": 184
+    },
+    {
+      "file": "components/SideBar.tsx",
+      "description": "Children enviado por props. En este caso seria \"MainC.tsx\"",
+      "line": 195
+    },
+    {
+      "file": "hooks/styles/useStyles.ts",
+      "description": "Se retorna el objeto directamente con los estilos de casi toda la aplicacion.",
+      "line": 5
+    },
+    {
+      "file": "hooks/useLanguage.ts",
+      "description": "Se llama el objeto con todas las traducciones: en este caso 3 idiomas (br,en,es)",
+      "line": 2
+    },
+    {
+      "file": "hooks/useLanguage.ts",
+      "description": "Estado global que retorna el idioma elegido por el usuario: (br,en,es)",
+      "line": 6
+    },
+    {
+      "file": "hooks/useLanguage.ts",
+      "description": "Esto lo que hace es basicamente retorna el mismo objeto pero particionado con unicamente el idioma que selecciono el usuario",
+      "line": 8
+    },
+    {
+      "file": "hooks/useStates.ts",
+      "description": "Y esto es para evitar importar en todos los componentes un useSelector",
+      "line": 3
+    },
+    {
+      "file": "hooks/useStates.ts",
+      "description": "Se pasan todos los states por el return y para usarlo seria:\r\n\r\nconst {ejemplo1} = useRoles()\r\n\r\nAsi solo retornaria el indicado.",
+      "line": 9
+    },
+    {
+      "file": "src/languages/traducciones.ts",
+      "description": "Un objeto de objetos con los 3 idiomas (es,en,br)",
+      "line": 1
+    },
+    {
+      "file": "src/redux/action.ts",
+      "description": "Se indica la url base de todas las peticiones siguientes.",
+      "line": 3
+    },
+    {
+      "file": "src/redux/action.ts",
+      "description": "Se importan las const que serian el type \"LOGIN\" en este caso, esto es el match que va a hacer en los reducer para actualizar los estados.",
+      "line": 8
+    },
+    {
+      "file": "src/redux/action.ts",
+      "description": "Esto es gracias a redux thunk que permite hacer funciones asyncronicas.",
+      "line": 10
+    },
+    {
+      "file": "src/redux/action.ts",
+      "description": "Hacemos un dispatch que se encarga de actualiza el estado actual del type indicado",
+      "line": 22
+    },
+    {
+      "file": "src/redux/action.ts",
+      "description": "Va a actualizar el reducer \"LOGIN\"",
+      "line": 23
+    },
+    {
+      "file": "src/redux/action.ts",
+      "description": "y el payload de ese mismo reducer por la data que devuelve la api",
+      "line": 24
+    },
+    {
+      "file": "src/redux/const.ts",
+      "description": "Estas constantes van a comunicar el action con el reducer, aunque no son necesarias pero se utiliza para tener la aplicacion mas ordenada",
+      "line": 1
+    },
+    {
+      "file": "src/redux/reducer.ts",
+      "description": "Importamos las constantes",
+      "line": 1
+    },
+    {
+      "file": "src/redux/reducer.ts",
+      "description": "Declaramos los estados iniciales de los reducers que querramos",
+      "line": 7
+    },
+    {
+      "file": "src/redux/reducer.ts",
+      "description": "El idioma default de la aplicacion va a ser ingles",
+      "line": 15
+    },
+    {
+      "file": "src/redux/reducer.ts",
+      "description": "creamos un funcion llamada userReducer que recibe (state,action), el state seria el estado anterior y el action es la data nueva despachada por el action, seria el type y la data",
+      "line": 20
+    },
+    {
+      "file": "src/redux/store.ts",
+      "description": "Aca indicamos que el tipo de middleware redux que vamos a utilizar es \"thunk\".\r\n\r\nBuscar mas informacion, pero este sirve para hacer multiples dispatch en una funcion",
+      "line": 6
+    },
+    {
+      "file": "src/redux/store.ts",
+      "description": "Indicamos que la funcion que va a actualizar todo el nuestro userReducer.",
+      "line": 9
+    },
+    {
+      "file": "src/redux/store.ts",
+      "description": "Y el tipo va a ser thunk",
+      "line": 10
+    },
+    {
+      "file": "src/redux/reducer.ts",
+      "description": "Hacemos un switch con el action type e indicamos cual debe actualizar",
+      "line": 22
+    }
+  ],
+  "ref": "master"
+}
