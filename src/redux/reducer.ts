@@ -9,7 +9,7 @@ const initialState = {
   proveedores: {},
   stock: {},
   accesorios: {},
-  bolsas: {},
+  bolsas: [],
   animales: [],
   ventas : [],
 
@@ -37,6 +37,9 @@ const initialState = {
 
 export const userReducer = (state = initialState, action: any) => {
 
+  console.log("ACTION",action)
+
+  
 switch (action.type) {
 
 
@@ -52,6 +55,11 @@ switch (action.type) {
       bolsa15kg: action.bolsa15kg,
       bolsa10kg: action.bolsa10kg,
       bolsa8kg: action.bolsa8kg,
+
+      lata290gr: action.lata290gr,
+      lata400gr: action.lata400gr,
+
+      sobre100gr: action.sobre100gr
   };
 
   case 'TOTAL_VENTAS':

@@ -101,8 +101,7 @@ export const getStockComida = async () => {
       const querySnapshot = await getDocs(collection(db, "productos"));
       const stock = querySnapshot.docs.map((doc) => doc.data());
 
-
-      const lowStock = stock.filter((item: any) => {
+/*       const lowStock = stock.filter((item: any) => {
 
         return {
           perros: {
@@ -113,31 +112,36 @@ export const getStockComida = async () => {
             },
           }
         }
-      })
-
-      console.log(lowStock);
-
+      }) */
 
 
       return dispatch({
         type: STOCK,
+        
         animales: querySnapshot.docs.map((doc) => {
           return {
             id: doc.id,
           };
         }),
         stock: stock,
-        bolsas : stock[1].bolsa,
-        latas : stock[1].lata,
+
+        //Perros
+        
+        bolsas : stock[1]?.bolsa,
+        latas : stock[1]?.lata,
 
 
-        bolsa15kg: stock[1].bolsa['15kg'],
-        bolsa10kg: stock[1].bolsa['10kg'],
-        bolsa8kg: stock[1].bolsa['8kg'],
+        bolsa15kg: stock[1]?.bolsa['15kg'],
+        bolsa10kg: stock[1]?.bolsa['10kg'],
+        bolsa8kg: stock[1]?.bolsa['8kg'],
 
-        lata290g: stock[1].lata['290g'],
-        lata400g: stock[1].lata['340g'],
-        lata800g: stock[1].lata['400g'],
+        lata290gr: stock[1].lata['290gr'],
+        lata400gr: stock[1].lata['400gr'],
+        lata800gr: stock[1].lata['400gr'],
+
+        sobre100gr: stock[1].sobre['100gr']
+
+
       });
     } catch (e: any) {
       console.log(e);
@@ -217,15 +221,22 @@ export const addNewGusto = async (props: any) => {
 
 export const addVentas = async (props: any) => {
 
-  console.log(props);
 
-    const {cliente,mascota,etapa,empaque,peso,productos,precio_kg,peso_kg} = props;
+    const {cliente,mascota,etapa,empaque,peso,productos,precio_kg,peso_kg,} = props;
+
+    console.log("Productos",productos)
     
     return async function (dispatch: any) {
   
       try {
 
-          const docRef = await addDoc(collection(db, "ventas"), {
+
+
+
+
+
+
+/*           const docRef = await addDoc(collection(db, "ventas"), {
             cliente: cliente || "Sin cliente",
             fecha: serverTimestamp(),
             productos: productos,
@@ -235,19 +246,38 @@ export const addVentas = async (props: any) => {
               return acc + item.subtotal;
             }, 0),
           });
-
+ */
 
           //Update stocks
 
           productos.forEach((item: any) => {
-            const perrosRef = db.collection('productos').doc(mascota);
+/*             const perrosRef = db.collection('productos').doc(mascota);
             perrosRef.update({
               [ `${ empaque}.${peso}.${etapa}.${item.producto}.${'total_kg'}`]: firebase.firestore.FieldValue.increment(-item.cantidad_kgs),
             }).then(() => {
               console.log("Document successfully updated!");
             });
+          } */
+
+          const perrosRef = db.collection('productos').doc(mascota);
+
+          if (item.cantidad_unitaria) {
+            const pesot = parseInt(peso.replace(/[a-zA-Z]/g, ""))
+            
+            perrosRef.update({
+              [ `${ empaque}.${peso}.${etapa}.${item.producto}.${'cantidad'}`]: firebase.firestore.FieldValue.increment(-item.cantidad_unitaria),
+            })
+            perrosRef.update({
+              [ `${ empaque}.${peso}.${etapa}.${item.producto}.${'total_kg'}`]: firebase.firestore.FieldValue.increment(-pesot),
+            })
+          } else {
+            perrosRef.update({
+              [ `${ empaque}.${peso}.${etapa}.${item.producto}.${'total_kg'}`]: firebase.firestore.FieldValue.increment(-item.cantidad_kgs),
+            })
           }
-          )
+
+        }
+        )
 
   
       

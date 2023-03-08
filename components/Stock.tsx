@@ -1,22 +1,35 @@
-import { View, Text, ScrollView, StyleSheet } from 'react-native'
+import { View, Text, ScrollView, StyleSheet, TouchableOpacity } from 'react-native'
 import React from 'react'
 import {useStates} from '../hooks/useStates'
 import {useState} from 'react'
 import { Chip } from 'react-native-paper';
 import { useEffect } from 'react';
-import { totalVentas } from '../src/redux/action';
+import { totalVentas,getStockComida } from '../src/redux/action';
 import { useDispatch } from 'react-redux';
 
 export default function Stock() {
   
     const dispatch = useDispatch()
   
-  const {bolsas, latas, bolsa8kg,bolsa15kg,bolsa10kg} = useStates()
+  const {bolsas, latas, bolsa8kg,bolsa15kg,bolsa10kg,lata400gr,lata290gr,sobre100gr} = useStates()
     
     const [empaque, setEmpaque] = useState('')
     const [pesoEmpaque, setPesoEmpaque] = useState('')  
     const [etapaEmpaque, setEtapaEmpaque] = useState('')
     const [animal, setAnimal] = useState('')
+
+
+
+
+    useEffect(() => {
+        getStockComida().then((res :any) => {
+            dispatch<any>(res)
+        })
+
+    }, [empaque,pesoEmpaque,etapaEmpaque,animal])
+    
+
+
 
     type maquetaTY = {
         [key: string]: {
@@ -32,88 +45,88 @@ export default function Stock() {
         'perros': {
             "bolsa": {
                 "15kg": {
-                    "adulto": bolsa15kg?.adulto,
-                    "cachorro": bolsa15kg?.cachorro,
+                    "adulto": bolsa15kg?.adulto || [],
+                    "cachorro": bolsa15kg?.cachorro || [],
                 },
                 "10kg": {
-                    "adulto": bolsa10kg?.adulto,
-                    "cachorro": bolsa10kg?.cachorro,
+                    "adulto": bolsa10kg?.adulto || [],
+                    "cachorro": bolsa10kg?.cachorro || [],
                 },
                 "8kg": {
-                    "adulto": bolsa8kg?.adulto,
-                    "cachorro": bolsa8kg?.cachorro,
+                    "adulto": bolsa8kg?.adulto || [],
+                    "cachorro": bolsa8kg?.cachorro || [],
                 }
             },
             "lata": {
-                "1kg": {
-                    "adulto": latas?.adulto,
-                    "cachorro": latas?.cachorro,
+                "290gr": {
+                    "adulto": lata290gr?.adulto || [],
+                    "cachorro": lata290gr?.cachorro || [],
                 },
-                "2kg": {
-                    "adulto": latas?.adulto,
-                    "cachorro": latas?.cachorro,
+                "400gr": {
+                    "adulto": lata400gr?.adulto || [],
+                    "cachorro": lata400gr?.cachorro || [],
                 },
                 "3kg": {
-                    "adulto": latas?.adulto,
-                    "cachorro": latas?.cachorro,
+                    "adulto": lata400gr?.adulto || [],
+                    "cachorro": lata400gr?.cachorro || [],
                 }
             },
             "sobre": {
-                "350gr": {
-                    "adulto": bolsas?.adulto,
-                    "cachorro": bolsas?.cachorro,
+                "100gr": {
+                    "adulto": sobre100gr?.adulto || [],
+                    "cachorro": sobre100gr?.cachorro || [],
                 },
-                "500gr": {
-                    "adulto": bolsas?.adulto,
-                    "cachorro": bolsas?.cachorro,
+                "90gr": {
+                    "adulto": [],
+                    "cachorro": [],
                 },
-                "1kg": {
-                    "adulto": bolsas?.adulto,
-                    "cachorro": bolsas?.cachorro,
-                }
+                "80gr": {
+                    "adulto": [],
+                    "cachorro": [],
+                },
             }
         },
         'gatos': {
             "bolsa": {
                 "15kg": {
-                    "adulto": bolsa15kg?.adulto,
-                    "cachorro": bolsa15kg?.cachorro,
+                    "adulto": bolsa15kg?.adulto || [],
+                    "cachorro": bolsa15kg?.cachorro || [],
                 },
                 "10kg": {
-                    "adulto": bolsa10kg?.adulto,
-                    "cachorro": bolsa10kg?.cachorro,
+                    "adulto": bolsa10kg?.adulto || [],
+                    "cachorro": bolsa10kg?.cachorro || [],
                 },
                 "8kg": {
-                    "adulto": bolsa8kg?.adulto,
-                    "cachorro": bolsa8kg?.cachorro,
+                    "adulto": bolsa8kg?.adulto || [],
+                    "cachorro": bolsa8kg?.cachorro || [],
                 }
             },
             "lata": {
                 "1kg": {
-                    "adulto": latas?.adulto,
-                    "cachorro": latas?.cachorro,
+                    "adulto": latas?.adulto || [],
+                    "cachorro": latas?.cachorro || [],
                 },
                 "2kg": {
-                    "adulto": latas?.adulto,
-                    "cachorro": latas?.cachorro,
+                    "adulto": latas?.adulto || [],
+                    "cachorro": latas?.cachorro || [],
                 },
                 "3kg": {
-                    "adulto": latas?.adulto,
-                    "cachorro": latas?.cachorro,
+                    "adulto": latas?.adulto || [],
+                    "cachorro": latas?.cachorro || [],
                 }
             },
             "sobre": {
                 "350gr": {
-                    "adulto": bolsas?.adulto,
-                    "cachorro": bolsas?.cachorro,
+                    "adulto": bolsas?.adulto || [],
+                    "cachorro": bolsas?.cachorro || [],
                 },
                 "500gr": {
-                    "adulto": bolsas?.adulto,
-                    "cachorro": bolsas?.cachorro,
+                    "adulto": bolsas?.adulto || [],
+                    "cachorro": bolsas?.cachorro || [],
                 },
                 "1kg": {
-                    "adulto": bolsas?.adulto,
-                    "cachorro": bolsas?.cachorro,
+                    "adulto": bolsas?.adulto || [],
+                    "cachorro": bolsas?.cachorro || [],
                 }
             }
         }
@@ -125,8 +138,12 @@ export default function Stock() {
     const chipEtapa = ['adulto', 'cachorro']
    
     const chipsPesoBolsa = ['15kg', '10kg', '8kg']
-    const chipsPesoLata = ['1kg', '2kg', '3kg']
-    const chipsPesoSobre = ['350gr', '500gr', '1kg']
+    const chipsPesoLata = ['290gr', '400gr', '3kg']
+    const chipsPesoSobre = ['100gr', '90gr', '80gr']
+
+    
+
+
 
   
     return (
@@ -236,7 +253,7 @@ export default function Stock() {
         {
             empaque && (
                 <View style={{
-                    flexDirection: 'row',
+                    flexDirection: 'column',
                     justifyContent: 'space-around',
                     alignItems: 'center',
                     marginTop: 15,
@@ -319,9 +336,21 @@ export default function Stock() {
                                 )
                             })  
                         }
+
+                        
                     </View>
                 ) : null
             } 
+                        <TouchableOpacity onPress={() => {
+                            setAnimal("")
+                            setEmpaque("")
+                            setEtapaEmpaque("")
+                            setPesoEmpaque("")
+                        }}>
+                            <Text>
+                                Delete filters
+                            </Text>
+                        </TouchableOpacity>
             </View>
             )
         }
@@ -346,24 +375,65 @@ export default function Stock() {
                         maqueta[animal][empaque][pesoEmpaque][etapaEmpaque] && Object.keys(maqueta[animal][empaque][pesoEmpaque][etapaEmpaque]).map((key) => {
                             return (
                                 <View style={styles.container}>
-                                    <Text style={styles.subtitle}>
-                                        Nombre: {maqueta[animal][empaque][pesoEmpaque][etapaEmpaque][key]?.nombre}
-                                    </Text>
-                                    <Text style={styles.subtitle}>
-                                        Precio por unidad: {maqueta[animal][empaque][pesoEmpaque][etapaEmpaque][key]?.precio}
-                                    </Text>
-                                    <Text style={styles.subtitle}>
-                                        Precio por kg: {maqueta[animal][empaque][pesoEmpaque][etapaEmpaque][key]?.precio_kg}
-                                    </Text>
-                                    <Text style={styles.subtitle}>
-                                        Stock: {maqueta[animal][empaque][pesoEmpaque][etapaEmpaque][key]?.cantidad}
-                                    </Text>
-                                    <Text style={styles.subtitle}>
-                                        Stock en Kgs: {maqueta[animal][empaque][pesoEmpaque][etapaEmpaque][key]?.total_kg}
-                                    </Text>
+                                    
+                                    {
+                                        Object.keys(maqueta[animal][empaque][pesoEmpaque][etapaEmpaque]).length > 0  ? (
+                                            
+                                                empaque !== 'lata' && empaque !== 'sobre' ? (
+                                                    <View>
+                                                        <Text style={styles.subtitle}>
+                                                        Nombre: {maqueta[animal][empaque][pesoEmpaque][etapaEmpaque][key]?.nombre}
+                                                    </Text>
+                                                    <Text style={styles.subtitle}>
+                                                        Precio por unidad: {maqueta[animal][empaque][pesoEmpaque][etapaEmpaque][key]?.precio}
+                                                    </Text>
+                                                    <Text style={styles.subtitle}>
+                                                        Precio por kg: {maqueta[animal][empaque][pesoEmpaque][etapaEmpaque][key]?.precio_kg}
+                                                    </Text>
+                                                    <Text style={styles.subtitle}>
+                                                        Stock: {maqueta[animal][empaque][pesoEmpaque][etapaEmpaque][key]?.cantidad}
+                                                    </Text>
+                                                    <Text style={styles.subtitle}>
+                                                        Stock en Kgs: {maqueta[animal][empaque][pesoEmpaque][etapaEmpaque][key]?.total_kg}
+                                                    </Text>
+                                            </View>
+                                                ) : (
+                                                    <View>
+        
+                                                        <Text style={styles.subtitle}>
+                                                            Nombre: {maqueta[animal][empaque][pesoEmpaque][etapaEmpaque][key]?.nombre}
+                                                        </Text>
+                                                        <Text style={styles.subtitle}>
+                                                            Precio por unidad: {maqueta[animal][empaque][pesoEmpaque][etapaEmpaque][key]?.precio}
+                                                        </Text>
+                                                        <Text style={styles.subtitle}>
+                                                            kg totales: {maqueta[animal][empaque][pesoEmpaque][etapaEmpaque][key]?.total_kg}
+                                                        </Text>
+                                                        <Text style={styles.subtitle}>
+                                                            Stock: {maqueta[animal][empaque][pesoEmpaque][etapaEmpaque][key]?.cantidad}
+                                                        </Text>
+        
+                                                    </View>
+                                                )
+                                            
+                                        ) : (
+                                            <View>
+                                                <Text>No hay stock</Text>
+                                            </View>
+                                        )
+                                    }
+                                    
                                 </View>
                             )
                         })
+                    }
+
+                    { empaque && pesoEmpaque && etapaEmpaque && animal &&
+                        Object.keys(maqueta[animal][empaque][pesoEmpaque][etapaEmpaque]).length === 0 && (
+                            <View>
+                                <Text>No hay stock</Text>
+                            </View>
+                        )
                     }
             
             

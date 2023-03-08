@@ -10,6 +10,12 @@ export const useStates = () => {
     const bolsa15kg = useSelector((state : any) => state.bolsa15kg)
     const bolsa10kg = useSelector((state : any) => state.bolsa10kg)
 
+    const lata290gr = useSelector((state : any) => state.lata290gr)
+    const lata400gr = useSelector((state : any) => state.lata400gr)
+
+    const sobre100gr = useSelector((state : any) => state.sobre100gr)
+
+
     const totalVentasHoy = useSelector((state : any) => state.totalVentasHoy)
     const totalVentasMes = useSelector((state : any) => state.totalVentasMes)
     const totalVentasAno = useSelector((state : any) => state.totalVentasAno)
@@ -26,6 +32,9 @@ export const useStates = () => {
 
 
     return {
+        lata400gr,
+        lata290gr,
+        sobre100gr,
         stock,
         animales,
         bolsas,
@@ -44,5 +53,6 @@ export const useStates = () => {
         totalVentasDebito,
         totalVentasCredito,
         totalVentasEnvio,
+        
     } 
 }
