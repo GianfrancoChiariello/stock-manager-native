@@ -25,7 +25,35 @@ export default function Stock() {
         "total_kg",
       ]
   
-  const {bolsas, latas, bolsa8kg,bolsa15kg,bolsa10kg} = useStates()
+      const {        
+        stock,
+        animales,
+        perros_bolsas,
+        perros_latas,
+        perros_sobres,
+        perros_bolsa22kg,
+        perros_bolsa15kg,
+        perros_bolsa10kg,
+        perros_bolsa8kg,
+        perros_bolsa6kg,
+        perros_bolsa3kg,
+        perros_bolsa2kg,
+        perros_lata400gr,
+        perros_lata340gr,
+        perros_lata290gr,
+        perros_sobre100gr,
+        perros_sobre85gr,
+        gatos_bolsas,
+        gatos_latas,
+        gatos_sobres,
+        gatos_bolsa1kg,
+        gatos_bolsa3kg,
+        gatos_lata340gr,
+        gatos_sobre85gr,
+        gatos_empaques,
+        perros_empaques,
+    } = useStates()
+    
 
     
     const [newGusto, setNewGusto] = useState<any>("")
@@ -91,90 +119,91 @@ export default function Stock() {
     const maqueta : maquetaTY = {
         'perros': {
             "bolsa": {
+                "22kg": {
+                    "adulto": perros_bolsa22kg?.adulto || [],
+                    "cachorro": perros_bolsa22kg?.cachorro || [],
+                },
                 "15kg": {
-                    "adulto": bolsa15kg?.adulto,
-                    "cachorro": bolsa15kg?.cachorro,
+                    "adulto": perros_bolsa15kg?.adulto || [],
+                    "cachorro": perros_bolsa15kg?.cachorro || [],
                 },
                 "10kg": {
-                    "adulto": bolsa10kg?.adulto,
-                    "cachorro": bolsa10kg?.cachorro,
+                    "adulto": perros_bolsa10kg?.adulto || [],
+                    "cachorro": perros_bolsa10kg?.cachorro || [],
                 },
                 "8kg": {
-                    "adulto": bolsa8kg?.adulto,
-                    "cachorro": bolsa8kg?.cachorro,
-                }
-            },
-            "lata": {
-                "1kg": {
-                    "adulto": latas?.adulto,
-                    "cachorro": latas?.cachorro,
+                    "adulto": perros_bolsa8kg?.adulto || [],
+                    "cachorro": perros_bolsa8kg?.cachorro || [],
                 },
-                "2kg": {
-                    "adulto": latas?.adulto,
-                    "cachorro": latas?.cachorro,
+                "6kg": {
+                    "adulto":  perros_bolsa6kg?.adulto || [],
+                    "cachorro":  perros_bolsa6kg?.cachorro || [],
                 },
                 "3kg": {
-                    "adulto": latas?.adulto,
-                    "cachorro": latas?.cachorro,
+                    "adulto": perros_bolsa3kg?.adulto || [],
+                    "cachorro": perros_bolsa3kg?.cachorro || [],
+                },
+                "2kg": {
+                    "adulto": perros_bolsa2kg?.adulto || [],
+                    "cachorro": perros_bolsa2kg?.cachorro || [],
+                },
+            },
+            "lata": {
+                "290gr": {
+                    "adulto": perros_lata290gr?.adulto || [],
+                    "cachorro": perros_lata290gr?.cachorro || [],
+                },
+                "340gr": {
+                    "adulto": perros_lata340gr?.adulto || [],
+                    "cachorro": perros_lata340gr?.cachorro || [],
+                },
+                "400gr": {
+                    "adulto": perros_lata400gr?.adulto || [],
+                    "cachorro": perros_lata400gr?.cachorro || [],
                 }
             },
             "sobre": {
-                "350gr": {
-                    "adulto": bolsas?.adulto,
-                    "cachorro": bolsas?.cachorro,
+                "100gr": {
+                    "adulto": perros_sobre100gr?.adulto || [],
+                    "cachorro": perros_sobre100gr?.cachorro || [],
                 },
-                "500gr": {
-                    "adulto": bolsas?.adulto,
-                    "cachorro": bolsas?.cachorro,
+                "90gr": {
+                    "adulto": [],
+                    "cachorro": [],
                 },
-                "1kg": {
-                    "adulto": bolsas?.adulto,
-                    "cachorro": bolsas?.cachorro,
+                "80gr": {
+                    "adulto": [],
+                    "cachorro": [],
+                },
+                "85gr": {
+                    "adulto": perros_sobre85gr?.adulto || [],
+                    "cachorro": perros_sobre85gr?.cachorro || [],
                 }
             }
         },
         'gatos': {
             "bolsa": {
-                "15kg": {
-                    "adulto": bolsa15kg?.adulto,
-                    "cachorro": bolsa15kg?.cachorro,
+                "1kg": {
+                    "adulto": gatos_bolsa1kg?.adulto || [],
+                    "cachorro": gatos_bolsa1kg?.cachorro || [],
                 },
-                "10kg": {
-                    "adulto": bolsa10kg?.adulto,
-                    "cachorro": bolsa10kg?.cachorro,
-                },
-                "8kg": {
-                    "adulto": bolsa8kg?.adulto,
-                    "cachorro": bolsa8kg?.cachorro,
+                "3kg": {
+                    "adulto": gatos_bolsa3kg?.adulto || [],
+                    "cachorro": gatos_bolsa3kg?.cachorro || [],
                 }
             },
             "lata": {
-                "1kg": {
-                    "adulto": latas?.adulto,
-                    "cachorro": latas?.cachorro,
-                },
-                "2kg": {
-                    "adulto": latas?.adulto,
-                    "cachorro": latas?.cachorro,
-                },
-                "3kg": {
-                    "adulto": latas?.adulto,
-                    "cachorro": latas?.cachorro,
+                "340gr": {
+                    "adulto": gatos_lata340gr?.adulto || [],
+                    "cachorro": gatos_lata340gr?.cachorro || [],
                 }
             },
             "sobre": {
-                "350gr": {
-                    "adulto": bolsas?.adulto,
-                    "cachorro": bolsas?.cachorro,
+                "85gr": {
+                    "adulto": gatos_sobre85gr?.adulto || [],
+                    "cachorro": gatos_sobre85gr?.cachorro || [],
                 },
-                "500gr": {
-                    "adulto": bolsas?.adulto,
-                    "cachorro": bolsas?.cachorro,
-                },
-                "1kg": {
-                    "adulto": bolsas?.adulto,
-                    "cachorro": bolsas?.cachorro,
-                }
+
             }
         }
     }
@@ -187,6 +216,7 @@ export default function Stock() {
     const chipsPesoBolsa = ['15kg', '10kg', '8kg']
     const chipsPesoLata = ['1kg', '2kg', '3kg']
     const chipsPesoSobre = ['350gr', '500gr', '1kg']
+    
 
     const styles = StyleSheet.create({
         container: {

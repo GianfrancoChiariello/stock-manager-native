@@ -49,17 +49,38 @@ switch (action.type) {
       animales: action.animales,
       stock: action.stock,
 
-      bolsas: action.bolsas,
-      latas: action.latas,
+      perros_empaques : action.perros_empaques,
+      gatos_empaques : action.gatos_empaques,
 
-      bolsa15kg: action.bolsa15kg,
-      bolsa10kg: action.bolsa10kg,
-      bolsa8kg: action.bolsa8kg,
-
-      lata290gr: action.lata290gr,
-      lata400gr: action.lata400gr,
-
-      sobre100gr: action.sobre100gr
+      perros_bolsas : action.perros_bolsas,
+      perros_latas  : action.perros_latas,
+      perros_sobres : action.perros_sobres,
+      
+      perros_bolsa22kg  : action.perros_bolsa22kg,
+      perros_bolsa15kg  : action.perros_bolsa15kg,
+      perros_bolsa10kg  : action.perros_bolsa10kg,
+      perros_bolsa8kg : action.perros_bolsa8kg,
+      perros_bolsa6kg : action.perros_bolsa6kg,
+      perros_bolsa3kg : action.perros_bolsa3kg,
+      perros_bolsa2kg : action.perros_bolsa2kg,
+      
+      perros_lata400gr  : action.perros_lata400gr,
+      perros_lata340gr  : action.perros_lata340gr,
+      perros_lata290gr  : action.perros_lata290gr,
+      
+      perros_sobre100gr : action.perros_sobre100gr,
+      perros_sobre85gr  : action.perros_sobre85gr,
+      
+      gatos_bolsas  : action.gatos_bolsas,
+      gatos_latas  : action.gatos_latas,
+      gatos_sobres  : action.gatos_sobres,
+      
+      gatos_bolsa1kg  : action.gatos_bolsa1kg,
+      gatos_bolsa3kg  : action.gatos_bolsa3kg,
+      
+      gatos_lata340gr : action.gatos_lata340gr,
+      
+      gatos_sobre85gr : action.gatos_sobre85gr,
   };
 
   case 'TOTAL_VENTAS':

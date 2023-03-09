@@ -124,22 +124,50 @@ export const getStockComida = async () => {
           };
         }),
         stock: stock,
-
+        
+        
+        
+        
+        
         //Perros
         
-        bolsas : stock[1]?.bolsa,
-        latas : stock[1]?.lata,
+        perros_bolsas : stock[1]?.bolsa,
+        perros_latas : stock[1]?.lata,
+        perros_sobres : stock[1]?.sobre,
+
+        perros_empaques: stock[1],
+
+        perros_bolsa22kg: stock[1]?.bolsa['22kg'],
+        perros_bolsa15kg: stock[1]?.bolsa['15kg'],
+        perros_bolsa10kg: stock[1]?.bolsa['10kg'],
+        perros_bolsa8kg: stock[1]?.bolsa['8kg'],
+        perros_bolsa6kg: stock[1]?.bolsa['6kg'],
+        perros_bolsa3kg: stock[1]?.bolsa['3kg'],
+        perros_bolsa2kg: stock[1]?.bolsa['2kg'],
+
+        perros_lata400gr: stock[1].lata['400gr'],
+        perros_lata340gr: stock[1].lata['340gr'],
+        perros_lata290gr: stock[1].lata['290gr'],
+
+        perros_sobre100gr: stock[1].sobre['100gr'],
+        perros_sobre85gr: stock[1].sobre['85gr'],
+
+        //Gatos
+
+        gatos_bolsas : stock[0]?.bolsa,
+        gatos_latas : stock[0]?.lata,
+        gatos_sobres : stock[0]?.sobre,
+
+        gatos_empaques: stock[0],
+
+        gatos_bolsa1kg: stock[0]?.bolsa['1kg'],
+        gatos_bolsa3kg: stock[0]?.bolsa['3kg'],
+
+        gatos_lata340gr: stock[0].lata['340gr'],
+
+        gatos_sobre85gr: stock[0].sobre['85gr'],
 
 
-        bolsa15kg: stock[1]?.bolsa['15kg'],
-        bolsa10kg: stock[1]?.bolsa['10kg'],
-        bolsa8kg: stock[1]?.bolsa['8kg'],
-
-        lata290gr: stock[1].lata['290gr'],
-        lata400gr: stock[1].lata['400gr'],
-        lata800gr: stock[1].lata['400gr'],
-
-        sobre100gr: stock[1].sobre['100gr']
 
 
       });
@@ -222,57 +250,53 @@ export const addNewGusto = async (props: any) => {
 export const addVentas = async (props: any) => {
 
 
-    const {cliente,mascota,etapa,empaque,peso,productos,precio_kg,peso_kg,} = props;
+    const {cliente,mascota,etapa,empaque,peso,productos,pago} = props;
 
-    console.log("Productos",productos)
+    console.log("pago",pago)
     
     return async function (dispatch: any) {
   
       try {
 
 
-
-
-
-
-
-/*           const docRef = await addDoc(collection(db, "ventas"), {
+          const docRef = await addDoc(collection(db, "ventas"), {
             cliente: cliente || "Sin cliente",
             fecha: serverTimestamp(),
+            pago: pago,
             productos: productos,
-
 
             total: productos.reduce((acc: any, item: any) => {
               return acc + item.subtotal;
             }, 0),
           });
- */
+
 
           //Update stocks
 
           productos.forEach((item: any) => {
-/*             const perrosRef = db.collection('productos').doc(mascota);
-            perrosRef.update({
-              [ `${ empaque}.${peso}.${etapa}.${item.producto}.${'total_kg'}`]: firebase.firestore.FieldValue.increment(-item.cantidad_kgs),
-            }).then(() => {
-              console.log("Document successfully updated!");
-            });
-          } */
 
-          const perrosRef = db.collection('productos').doc(mascota);
+
+          const perrosRef = db.collection('productos').doc(item.mascota);
 
           if (item.cantidad_unitaria) {
-            const pesot = parseInt(peso.replace(/[a-zA-Z]/g, ""))
+            const pesot = parseInt(item.peso.replace(/[a-zA-Z]/g, ""))
+            const pesoTotalDescount = (pesot * item.cantidad_unitaria) / 1000
+
+          console.log(item.mascota,item.empaque,item.peso,item.etapa,item.producto, 'cantidad', item.cantidad_unitaria)
+          console.log(item.mascota,item.empaque,item.peso,item.etapa,item.producto, 'total_kg', pesot)
+
             
             perrosRef.update({
-              [ `${ empaque}.${peso}.${etapa}.${item.producto}.${'cantidad'}`]: firebase.firestore.FieldValue.increment(-item.cantidad_unitaria),
+              [ `${item.empaque}.${item.peso}.${item.etapa}.${item.producto}.${'cantidad'}`]: firebase.firestore.FieldValue.increment(-item.cantidad_unitaria),
             })
             perrosRef.update({
-              [ `${ empaque}.${peso}.${etapa}.${item.producto}.${'total_kg'}`]: firebase.firestore.FieldValue.increment(-pesot),
+              [ `${item.empaque}.${item.peso}.${item.etapa}.${item.producto}.${'total_kg'}`]: firebase.firestore.FieldValue.increment(   -parseFloat(pesoTotalDescount.toFixed(2))),
             })
           } else {
+            const pesot = parseInt(item.peso.replace(/[a-zA-Z]/g, ""))
+            
             perrosRef.update({
-              [ `${ empaque}.${peso}.${etapa}.${item.producto}.${'total_kg'}`]: firebase.firestore.FieldValue.increment(-item.cantidad_kgs),
+              [ `${item.empaque}.${item.peso}.${item.etapa}.${item.producto}.${'total_kg'}`]: firebase.firestore.FieldValue.increment(- ( pesot * item.cantidad_kgs )),
             })
           }
 
