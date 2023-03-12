@@ -24,9 +24,9 @@ export default function SideBar({children, title, route, icon} : any) {
 
     const rutas = [
         {
-            name: 'Stock',
-            icon: 'unlock',
-            route: 'Stock',
+            name: 'Dashboard',
+            icon: 'users',
+            route: 'Dashboard',
             action: null
         },
         {
@@ -36,21 +36,22 @@ export default function SideBar({children, title, route, icon} : any) {
             action: null
         },
         {
-            name: 'Add ventas',
-            icon: 'users',
-            route: 'Ventas',
+            name: 'Stock',
+            icon: 'unlock',
+            route: 'Stock',
             action: null
         },
         {
-            name: 'Dashboard',
+            name: 'Add ventas',
             icon: 'users',
-            route: 'Dashboard',
+            route: 'Ventas',
             action: null
         },
     ]
     
     const style = StyleSheet.create({
         nav: {
+            paddingTop: StatusBar.currentHeight,
             backgroundColor: 'rgba(43, 43, 43, 1)',
             flexDirection: 'row',
             justifyContent: 'space-between',

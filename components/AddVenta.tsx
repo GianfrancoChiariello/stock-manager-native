@@ -580,13 +580,19 @@ const maqueta : maquetaTY = {
               setEtapaVenta("")
               setEmpaqueVenta("")
               setPesoVenta("")
-            }}>
-              <Text>Reset</Text>
+            }}
+            style={{
+              backgroundColor: 'yellow',
+              borderRadius: 10,
+              paddingHorizontal: 15,
+              paddingVertical: 5,
+            }}
+            >
+              <Text>Reset filters</Text>
             </TouchableOpacity>
           </View>
 
           <View>
-            <Text>Producto</Text>
             {mascotaVenta && empaqueVenta && pesoVenta && etapaVenta &&
               maqueta[mascotaVenta][empaqueVenta][pesoVenta][etapaVenta] ? (
 
@@ -779,8 +785,15 @@ const maqueta : maquetaTY = {
 
                 ))
               ) : (
-                <View>
-                  <Text>Selecciona todos los campos</Text>
+                <View style={{
+                  width: '100%',
+                  alignItems: 'center',
+                  marginTop: 20,
+                }}>
+                  <Text style={{
+                    textAlign: 'center',
+                    width: 300,
+                  }}>Selecciona todos los campos para ver los productos</Text>
                   <Text>
 
                   </Text>
@@ -795,14 +808,34 @@ const maqueta : maquetaTY = {
 
 
 
-            <TouchableOpacity onPress={() => {
-              addVenta()
-            }}>
-              <Text>
-                Agregar venta
-              </Text>
+                  <View style={{
+                    width: '100%',
+                    alignItems: 'center',
+                  }}>
+                  <TouchableOpacity onPress={() => {
+                      addVenta()
+                    }}
+                    style={{
+                      backgroundColor: 'rgba(87, 115, 83, 1)',
+                      width: 150,
+                      height: 40,
+                      borderRadius: 10,
+                      paddingHorizontal: 10,
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                    >
+                      <Text style={{
+                        color: 'white',
+                        fontSize: 15,
+                        fontWeight: '500',
+                        letterSpacing: 0.25,
+                      }}>
+                        Agregar venta
+                      </Text>
 
-            </TouchableOpacity>
+                    </TouchableOpacity>
+                  </View>
 
 
 

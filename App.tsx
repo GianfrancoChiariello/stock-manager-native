@@ -1,4 +1,3 @@
-import 'react-native-gesture-handler';
 import {Provider} from 'react-redux';
 import {store} from './src/redux/store';
 import {
@@ -6,10 +5,7 @@ import {
   Route,
   Switch
 } from "react-router-native";
-import { useEffect,useState } from 'react';
 import {useHistory} from 'react-router-native';
-import {GestureHandlerRootView } from 'react-native-gesture-handler';
-import { StatusBar } from 'react-native';
 
 
 import Stock from './screens/Stock';
@@ -18,19 +14,16 @@ import Dashboard from './screens/Dashboard';
 import ChangeStock from './screens/ChangeStock';
 import Ventas from './screens/Ventas';
 import Proveedorr from './screens/Proveedor';
-
+import { StatusBar } from 'react-native';
 
 export default function App() {
 
   const route = useHistory()
-  
+
+  StatusBar.setBackgroundColor('rgba(43, 43, 43, 1)');
 
   return (
     <Provider store={store}>  
-    <GestureHandlerRootView style={{
-      flex: 1,
-      marginTop: StatusBar.currentHeight || 0,
-    }}>
       <NativeRouter>
         <Switch>
           <Route exact path="/" component={Dashboard} />
@@ -41,7 +34,6 @@ export default function App() {
           <Route exact path="/Proveedorr" component={Proveedorr} />
         </Switch>
       </NativeRouter>
-  </GestureHandlerRootView>
   </Provider>
   )
 }

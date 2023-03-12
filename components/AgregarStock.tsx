@@ -683,7 +683,10 @@ export default function Stock() {
                     </View>
 
                     
-                    <View>
+                    <View style={{
+                        width: '100%',
+                        alignItems: 'center',
+                    }}>
                         <Text style={{
                             color: 'white',
                             margin: 5,
@@ -695,6 +698,8 @@ export default function Stock() {
                             width: 200,
                             height: 40,
                             margin: 5,
+                            borderRadius: 10,
+                            padding: 10,
                         }}
                         placeholder="Nuevo valor"
                         onChangeText={(text) => {
