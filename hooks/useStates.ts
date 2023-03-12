@@ -59,6 +59,7 @@ export const useStates = () => {
     const totalVentasEnvio = useSelector((state : any) => state.totalVentasEnvio)
 
 
+
     return {
         totalVentasHoy,
         totalVentasMes,
@@ -73,7 +74,6 @@ export const useStates = () => {
         totalVentasEnvio,
         perros_empaques,
         gatos_empaques,
-
         stock,
         animales,
         perros_bolsas,

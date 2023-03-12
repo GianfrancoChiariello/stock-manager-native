@@ -6,7 +6,6 @@ import {
   Route,
   Switch
 } from "react-router-native";
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect,useState } from 'react';
 import {useHistory} from 'react-router-native';
 import {GestureHandlerRootView } from 'react-native-gesture-handler';
@@ -18,6 +17,7 @@ import Home from './screens/Home';
 import Dashboard from './screens/Dashboard';
 import ChangeStock from './screens/ChangeStock';
 import Ventas from './screens/Ventas';
+import Proveedorr from './screens/Proveedor';
 
 
 export default function App() {
@@ -38,6 +38,7 @@ export default function App() {
           <Route exact path="/Dashboard" component={Dashboard} />
           <Route exact path="/ChangeStock" component={ChangeStock} />
           <Route exact path="/Ventas" component={Ventas} />
+          <Route exact path="/Proveedorr" component={Proveedorr} />
         </Switch>
       </NativeRouter>
   </GestureHandlerRootView>

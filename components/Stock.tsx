@@ -46,19 +46,6 @@ export default function Stock() {
     const [animal, setAnimal] = useState('')
 
 
-/*     console.log("perros_bolsas", perros_bolsas)
-    console.log("perros_latas", perros_latas)
-    console.log("perros_sobres", perros_sobres)
-
-    console.log("gatos_bolsas", gatos_bolsas)
-    console.log("gatos_latas", gatos_latas)
-    console.log("gatos_sobres", gatos_sobres) */
-
-
-    console.log(gatos_empaques)
-    console.log(perros_empaques)
-
-
     useEffect(() => {
         getStockComida().then((res :any) => {
             dispatch<any>(res)

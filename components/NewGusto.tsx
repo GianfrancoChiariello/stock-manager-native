@@ -66,14 +66,14 @@ export default function Stock() {
     const [etapaEmpaque, setEtapaEmpaque] = useState('')
     const [animal, setAnimal] = useState('')
     const [campo, setCampo] = useState('')
-     const [addArray, setAddArray] = useState<any>([])
+    const [addArray, setAddArray] = useState<any>([])
 
 
   const addGusto = () => {
-    if (newGusto === "" || newCantidad === "" || newPrecio === "" || newPrecioKg === "" || newNombre === "") {
+    if (newGusto === "" || newCantidad === "" || newPrecio === "" || newNombre === "") {
       alert("Todos los campos son obligatorios")
     } else {
-      let obj = {
+      let obj1 = {
         newGusto,
         newCantidad,
         newPrecio,
@@ -84,7 +84,23 @@ export default function Stock() {
         pesoEmpaque,
         etapaEmpaque
       }
-      setAddArray([...addArray, obj])
+
+      let obj2 = {
+        newGusto,
+        newCantidad,
+        newPrecio,
+        newNombre,
+        animal,
+        empaque,
+        pesoEmpaque,
+        etapaEmpaque
+      }
+      
+    if (empaque === "bolsa") {
+        setAddArray([...addArray, obj1])
+      } else {
+        setAddArray([...addArray, obj2])
+    }
 
       addNewGusto(addArray).then((res : any) => {
         dispatch<any>(res)
@@ -212,11 +228,7 @@ export default function Stock() {
     const chipsAnimal = ['perros', 'gatos']
     const chipsEmpaque = ['bolsa', 'lata', 'sobre']
     const chipEtapa = ['adulto', 'cachorro']
-   
-    const chipsPesoBolsa = ['15kg', '10kg', '8kg']
-    const chipsPesoLata = ['1kg', '2kg', '3kg']
-    const chipsPesoSobre = ['350gr', '500gr', '1kg']
-    
+       
 
     const styles = StyleSheet.create({
         container: {
@@ -252,12 +264,6 @@ export default function Stock() {
   
     return (
         <View>
-
-
-
-
-
-
 
 
 
@@ -313,18 +319,22 @@ export default function Stock() {
                 />
             </View>
 
-            <View>
-              <Text style={styles.subtitle}>Precio/Kg*:</Text>
-
-                <TextInput 
-                  style={styles.inputs}
-                  placeholder="Example: dog_chow_pollo_arroz.."
-                  onChangeText={(text) => {
-                    setNewPrecioKg(text)
-                  }}
-                  value={newPrecioKg}
-                />
-            </View>
+                  {
+                    empaque === 'bolsa' && (
+                        <View>
+                        <Text style={styles.subtitle}>Precio/Kg*:</Text>
+          
+                          <TextInput 
+                            style={styles.inputs}
+                            placeholder="Example: dog_chow_pollo_arroz.."
+                            onChangeText={(text) => {
+                              setNewPrecioKg(text)
+                            }}
+                            value={newPrecioKg}
+                          />
+                      </View>
+                    )
+                  }
 
 
             <View style={{
@@ -414,7 +424,7 @@ export default function Stock() {
                     {
                         empaque && (
                             <View style={{
-                                flexDirection: 'row',
+                                flexDirection: 'column',
                                 justifyContent: 'space-around',
                                 alignItems: 'center',
                                 marginTop: 15,
@@ -426,9 +436,14 @@ export default function Stock() {
                             empaque === 'bolsa' ? (
                                 <View style={{
                                     flexDirection: 'row',
+                                    flexWrap: 'wrap',
+                                    justifyContent: 'center',
                                 }}>
-                                    {
-                                        chipsPesoBolsa.map((chip) => {
+                                   
+                                   
+                                   
+                                   {
+                                        animal && animal === 'perros' && perros_bolsas && Object.keys(perros_bolsas).map((chip) => {
                                             return (
                                                 <Chip
                                                     key={chip}
@@ -447,13 +462,45 @@ export default function Stock() {
                                             )
                                         }) 
                                     }
+
+
+{
+                                        animal && animal === 'gatos' && gatos_bolsas && Object.keys(gatos_bolsas).map((chip) => {
+                                            return (
+                                                <Chip
+                                                    key={chip}
+                                                    style={{
+                                                        margin: 5,
+                                                        backgroundColor: chip === pesoEmpaque ? 'green' : 'gray',
+                                                        width: 100,
+                                                        borderRadius: 10,
+                                                    }}
+                                                    onPress={() => {
+                                                        setPesoEmpaque(chip)
+                                                    }}
+                                                >
+                                                    {chip}
+                                                </Chip>
+                                            )
+                                        }) 
+                                    }
+                                
+                                
+                                
+                                
                                 </View>
-                            ) : empaque === 'lata' ? (
+                           
+                           
+                           
+                           ) : empaque === 'lata' ? (
                                 <View  style={{
                                     flexDirection: 'row',
                                 }}>
+                                    
+                                    
+                                    
                                     {
-                                        chipsPesoLata.map((chip) => {
+                                        animal && animal === 'perros' && perros_latas && Object.keys(perros_latas).map((chip) => {
                                             return (
                                                 <Chip
                                                     key={chip}
@@ -472,13 +519,43 @@ export default function Stock() {
                                             )
                                         })
                                     }
+
+                                    {
+                                        animal && animal === 'gatos' && gatos_latas && Object.keys(gatos_latas).map((chip) => {
+                                            return (
+                                                <Chip
+                                                    key={chip}
+                                                    style={{
+                                                        margin: 5,
+                                                        backgroundColor: chip === pesoEmpaque ? 'green' : 'gray',
+                                                        width: 100,
+                                                        borderRadius: 10,
+                                                    }}
+                                                    onPress={() => {
+                                                        setPesoEmpaque(chip)
+                                                    }}
+                                                >
+                                                    {chip}
+                                                </Chip>
+                                            )
+                                        })
+                                    }
+
+
+
+                                
+                                
+                                
+                                
                                 </View>
                             ) : empaque === 'sobre' ? (
                                 <View style={{
                                     flexDirection: 'row',
                                 }}>
+                                    
+                                    
                                     {
-                                        chipsPesoSobre.map((chip) => {
+                                        animal && animal === 'perros' && perros_sobres && Object.keys(perros_sobres).map((chip) => {
                                             return (
                                                 <Chip
                                                     key={chip}
@@ -497,6 +574,30 @@ export default function Stock() {
                                             )
                                         })  
                                     }
+
+                                    {
+                                        animal && animal === 'gatos' && gatos_sobres && Object.keys(gatos_sobres).map((chip) => {
+                                            return (
+                                                <Chip
+                                                    key={chip}
+                                                    style={{
+                                                        margin: 5,
+                                                        backgroundColor: chip === pesoEmpaque ? 'green' : 'gray',
+                                                        width: 100,
+                                                        borderRadius: 10,
+                                                    }}
+                                                    onPress={() => {
+                                                        setPesoEmpaque(chip)
+                                                    }}
+                                                >
+                                                    {chip}
+                                                </Chip>
+                                            )
+                                        })  
+                                    }
+
+
+
                                 </View>
                             ) : null
                         } 

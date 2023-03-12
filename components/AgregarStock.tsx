@@ -39,10 +39,37 @@ export default function Stock() {
         "total_kg",
       ]
   
-  const {bolsas, latas, bolsa8kg,bolsa15kg,bolsa10kg} = useStates()
+      const {        
+        stock,
+        animales,
+        perros_bolsas,
+        perros_latas,
+        perros_sobres,
+        perros_bolsa22kg,
+        perros_bolsa15kg,
+        perros_bolsa10kg,
+        perros_bolsa8kg,
+        perros_bolsa6kg,
+        perros_bolsa3kg,
+        perros_bolsa2kg,
+        perros_lata400gr,
+        perros_lata340gr,
+        perros_lata290gr,
+        perros_sobre100gr,
+        perros_sobre85gr,
+        gatos_bolsas,
+        gatos_latas,
+        gatos_sobres,
+        gatos_bolsa1kg,
+        gatos_bolsa3kg,
+        gatos_lata340gr,
+        gatos_sobre85gr,
+        gatos_empaques,
+        perros_empaques,
+    } = useStates()
 
-  const [estado, setEstado] = useState('Actualizar')
-    
+
+    const [estado, setEstado] = useState('Actualizar')
     const [empaque, setEmpaque] = useState('')
     const [pesoEmpaque, setPesoEmpaque] = useState('')  
     const [etapaEmpaque, setEtapaEmpaque] = useState('')
@@ -51,7 +78,6 @@ export default function Stock() {
     const [valor, setValor] = useState(0)
     const [campo, setCampo] = useState('')
 
-  const [array, setArray] = useState<any>([])
 
 
 
@@ -92,7 +118,7 @@ export default function Stock() {
       }
 
 
-    type maquetaTY = {
+      type maquetaTY = {
         [key: string]: {
             [key: string]: {
                 [key: string]: {
@@ -101,96 +127,97 @@ export default function Stock() {
             }
         }
     }
-  
+    
     const maqueta : maquetaTY = {
-        'perros': {
-            "bolsa": {
-                "15kg": {
-                    "adulto": bolsa15kg?.adulto,
-                    "cachorro": bolsa15kg?.cachorro,
-                },
-                "10kg": {
-                    "adulto": bolsa10kg?.adulto,
-                    "cachorro": bolsa10kg?.cachorro,
-                },
-                "8kg": {
-                    "adulto": bolsa8kg?.adulto,
-                    "cachorro": bolsa8kg?.cachorro,
-                }
-            },
-            "lata": {
-                "1kg": {
-                    "adulto": latas?.adulto,
-                    "cachorro": latas?.cachorro,
-                },
-                "2kg": {
-                    "adulto": latas?.adulto,
-                    "cachorro": latas?.cachorro,
-                },
-                "3kg": {
-                    "adulto": latas?.adulto,
-                    "cachorro": latas?.cachorro,
-                }
-            },
-            "sobre": {
-                "350gr": {
-                    "adulto": bolsas?.adulto,
-                    "cachorro": bolsas?.cachorro,
-                },
-                "500gr": {
-                    "adulto": bolsas?.adulto,
-                    "cachorro": bolsas?.cachorro,
-                },
-                "1kg": {
-                    "adulto": bolsas?.adulto,
-                    "cachorro": bolsas?.cachorro,
-                }
-            }
-        },
-        'gatos': {
-            "bolsa": {
-                "15kg": {
-                    "adulto": bolsa15kg?.adulto,
-                    "cachorro": bolsa15kg?.cachorro,
-                },
-                "10kg": {
-                    "adulto": bolsa10kg?.adulto,
-                    "cachorro": bolsa10kg?.cachorro,
-                },
-                "8kg": {
-                    "adulto": bolsa8kg?.adulto,
-                    "cachorro": bolsa8kg?.cachorro,
-                }
-            },
-            "lata": {
-                "1kg": {
-                    "adulto": latas?.adulto,
-                    "cachorro": latas?.cachorro,
-                },
-                "2kg": {
-                    "adulto": latas?.adulto,
-                    "cachorro": latas?.cachorro,
-                },
-                "3kg": {
-                    "adulto": latas?.adulto,
-                    "cachorro": latas?.cachorro,
-                }
-            },
-            "sobre": {
-                "350gr": {
-                    "adulto": bolsas?.adulto,
-                    "cachorro": bolsas?.cachorro,
-                },
-                "500gr": {
-                    "adulto": bolsas?.adulto,
-                    "cachorro": bolsas?.cachorro,
-                },
-                "1kg": {
-                    "adulto": bolsas?.adulto,
-                    "cachorro": bolsas?.cachorro,
-                }
-            }
-        }
+      'perros': {
+          "bolsa": {
+              "22kg": {
+                  "adulto": perros_bolsa22kg?.adulto || [],
+                  "cachorro": perros_bolsa22kg?.cachorro || [],
+              },
+              "15kg": {
+                  "adulto": perros_bolsa15kg?.adulto || [],
+                  "cachorro": perros_bolsa15kg?.cachorro || [],
+              },
+              "10kg": {
+                  "adulto": perros_bolsa10kg?.adulto || [],
+                  "cachorro": perros_bolsa10kg?.cachorro || [],
+              },
+              "8kg": {
+                  "adulto": perros_bolsa8kg?.adulto || [],
+                  "cachorro": perros_bolsa8kg?.cachorro || [],
+              },
+              "6kg": {
+                  "adulto":  perros_bolsa6kg?.adulto || [],
+                  "cachorro":  perros_bolsa6kg?.cachorro || [],
+              },
+              "3kg": {
+                  "adulto": perros_bolsa3kg?.adulto || [],
+                  "cachorro": perros_bolsa3kg?.cachorro || [],
+              },
+              "2kg": {
+                  "adulto": perros_bolsa2kg?.adulto || [],
+                  "cachorro": perros_bolsa2kg?.cachorro || [],
+              },
+          },
+          "lata": {
+              "290gr": {
+                  "adulto": perros_lata290gr?.adulto || [],
+                  "cachorro": perros_lata290gr?.cachorro || [],
+              },
+              "340gr": {
+                  "adulto": perros_lata340gr?.adulto || [],
+                  "cachorro": perros_lata340gr?.cachorro || [],
+              },
+              "400gr": {
+                  "adulto": perros_lata400gr?.adulto || [],
+                  "cachorro": perros_lata400gr?.cachorro || [],
+              }
+          },
+          "sobre": {
+              "100gr": {
+                  "adulto": perros_sobre100gr?.adulto || [],
+                  "cachorro": perros_sobre100gr?.cachorro || [],
+              },
+              "90gr": {
+                  "adulto": [],
+                  "cachorro": [],
+              },
+              "80gr": {
+                  "adulto": [],
+                  "cachorro": [],
+              },
+              "85gr": {
+                  "adulto": perros_sobre85gr?.adulto || [],
+                  "cachorro": perros_sobre85gr?.cachorro || [],
+              }
+          }
+      },
+      'gatos': {
+          "bolsa": {
+              "1kg": {
+                  "adulto": gatos_bolsa1kg?.adulto || [],
+                  "cachorro": gatos_bolsa1kg?.cachorro || [],
+              },
+              "3kg": {
+                  "adulto": gatos_bolsa3kg?.adulto || [],
+                  "cachorro": gatos_bolsa3kg?.cachorro || [],
+              }
+          },
+          "lata": {
+              "340gr": {
+                  "adulto": gatos_lata340gr?.adulto || [],
+                  "cachorro": gatos_lata340gr?.cachorro || [],
+              }
+          },
+          "sobre": {
+              "85gr": {
+                  "adulto": gatos_sobre85gr?.adulto || [],
+                  "cachorro": gatos_sobre85gr?.cachorro || [],
+              },
+    
+          }
+      }
     }
   
   
@@ -293,21 +320,21 @@ export default function Stock() {
                                 Elegir animal:
                             </Text>
                         {
-                            chipsAnimal.map((chip) => {
+                            animales && animales.map((animald : any) => {
                                 return (
                                     <Chip
-                                        key={chip}
+                                        key={animald.id}
                                         style={{
                                             margin: 5,
-                                            backgroundColor: chip === animal ? 'green' : 'gray',
+                                            backgroundColor: animald.id === animal ? 'green' : 'gray',
                                             width: 100,
                                             borderRadius: 10,
                                         }}
                                         onPress={() => {
-                                            setAnimal(chip)
+                                            setAnimal(animald.id)
                                         }}
                                     >
-                                        {chip}
+                                        {animald.id}
                                     </Chip>
                                 )
                             })
@@ -319,7 +346,7 @@ export default function Stock() {
                                 Elegir empaque:
                             </Text>
                         {
-                            chipsEmpaque.map((chip) => {
+                            stock && Object.keys(stock[1]).map((chip: any) => {
                                 return (
                                     <Chip
                                         key={chip}
@@ -370,7 +397,7 @@ export default function Stock() {
                     {
                         empaque && (
                             <View style={{
-                                flexDirection: 'row',
+                                flexDirection: 'column',
                                 justifyContent: 'space-around',
                                 alignItems: 'center',
                                 marginTop: 15,
@@ -382,9 +409,14 @@ export default function Stock() {
                             empaque === 'bolsa' ? (
                                 <View style={{
                                     flexDirection: 'row',
+                                    flexWrap: 'wrap',
+                                    justifyContent: 'center',
                                 }}>
-                                    {
-                                        chipsPesoBolsa.map((chip) => {
+                                   
+                                   
+                                   
+                                   {
+                                        animal && animal === 'perros' && perros_bolsas && Object.keys(perros_bolsas).map((chip) => {
                                             return (
                                                 <Chip
                                                     key={chip}
@@ -403,13 +435,45 @@ export default function Stock() {
                                             )
                                         }) 
                                     }
+
+
+{
+                                        animal && animal === 'gatos' && gatos_bolsas && Object.keys(gatos_bolsas).map((chip) => {
+                                            return (
+                                                <Chip
+                                                    key={chip}
+                                                    style={{
+                                                        margin: 5,
+                                                        backgroundColor: chip === pesoEmpaque ? 'green' : 'gray',
+                                                        width: 100,
+                                                        borderRadius: 10,
+                                                    }}
+                                                    onPress={() => {
+                                                        setPesoEmpaque(chip)
+                                                    }}
+                                                >
+                                                    {chip}
+                                                </Chip>
+                                            )
+                                        }) 
+                                    }
+                                
+                                
+                                
+                                
                                 </View>
-                            ) : empaque === 'lata' ? (
+                           
+                           
+                           
+                           ) : empaque === 'lata' ? (
                                 <View  style={{
                                     flexDirection: 'row',
                                 }}>
+                                    
+                                    
+                                    
                                     {
-                                        chipsPesoLata.map((chip) => {
+                                        animal && animal === 'perros' && perros_latas && Object.keys(perros_latas).map((chip) => {
                                             return (
                                                 <Chip
                                                     key={chip}
@@ -428,13 +492,43 @@ export default function Stock() {
                                             )
                                         })
                                     }
+
+                                    {
+                                        animal && animal === 'gatos' && gatos_latas && Object.keys(gatos_latas).map((chip) => {
+                                            return (
+                                                <Chip
+                                                    key={chip}
+                                                    style={{
+                                                        margin: 5,
+                                                        backgroundColor: chip === pesoEmpaque ? 'green' : 'gray',
+                                                        width: 100,
+                                                        borderRadius: 10,
+                                                    }}
+                                                    onPress={() => {
+                                                        setPesoEmpaque(chip)
+                                                    }}
+                                                >
+                                                    {chip}
+                                                </Chip>
+                                            )
+                                        })
+                                    }
+
+
+
+                                
+                                
+                                
+                                
                                 </View>
                             ) : empaque === 'sobre' ? (
                                 <View style={{
                                     flexDirection: 'row',
                                 }}>
+                                    
+                                    
                                     {
-                                        chipsPesoSobre.map((chip) => {
+                                        animal && animal === 'perros' && perros_sobres && Object.keys(perros_sobres).map((chip) => {
                                             return (
                                                 <Chip
                                                     key={chip}
@@ -453,6 +547,30 @@ export default function Stock() {
                                             )
                                         })  
                                     }
+
+                                    {
+                                        animal && animal === 'gatos' && gatos_sobres && Object.keys(gatos_sobres).map((chip) => {
+                                            return (
+                                                <Chip
+                                                    key={chip}
+                                                    style={{
+                                                        margin: 5,
+                                                        backgroundColor: chip === pesoEmpaque ? 'green' : 'gray',
+                                                        width: 100,
+                                                        borderRadius: 10,
+                                                    }}
+                                                    onPress={() => {
+                                                        setPesoEmpaque(chip)
+                                                    }}
+                                                >
+                                                    {chip}
+                                                </Chip>
+                                            )
+                                        })  
+                                    }
+
+
+
                                 </View>
                             ) : null
                         } 
@@ -461,7 +579,7 @@ export default function Stock() {
                     }
 
                     {
-                        bolsas && (
+                        stock && (
                             <View 
                             style={{
                                 width: '100%',
@@ -496,12 +614,19 @@ export default function Stock() {
                                                         <Text style={styles.subtitle}>
                                                             Nombre: {maqueta[animal][empaque][pesoEmpaque][etapaEmpaque][key]?.nombre}
                                                         </Text>
+                                                        
                                                         <Text style={styles.subtitle}>
                                                             Precio por unidad: {maqueta[animal][empaque][pesoEmpaque][etapaEmpaque][key]?.precio}
                                                         </Text>
-                                                        <Text style={styles.subtitle}>
-                                                            Precio por kg: {maqueta[animal][empaque][pesoEmpaque][etapaEmpaque][key]?.precio_kg}
-                                                        </Text>
+                                                        
+                                                        {
+                                                            empaque === 'bolsa' && (
+                                                                <Text style={styles.subtitle}>
+                                                                    Precio por kg: {maqueta[animal][empaque][pesoEmpaque][etapaEmpaque][key]?.precio_kg}
+                                                                </Text>
+                                                            )
+                                                        }
+                                                        
                                                         <Text style={styles.subtitle}>
                                                             Stock: {maqueta[animal][empaque][pesoEmpaque][etapaEmpaque][key]?.cantidad}
                                                         </Text>

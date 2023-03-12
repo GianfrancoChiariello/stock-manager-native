@@ -32,7 +32,7 @@ export default function SideBar({children, title, route, icon} : any) {
         {
             name: 'Proveedor',
             icon: 'unlock',
-            route: 'specialAccess',
+            route: 'Proveedorr',
             action: null
         },
         {

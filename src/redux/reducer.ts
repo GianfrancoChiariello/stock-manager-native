@@ -12,6 +12,7 @@ const initialState = {
   bolsas: [],
   animales: [],
   ventas : [],
+  distribuidores: [],
 
 
   //Total ventas
@@ -110,6 +111,18 @@ switch (action.type) {
         ...state,
         messageUpdate : action.payload,
       };
+
+    case 'GET_DISTRIBUIDORES':
+      return {
+        ...state,
+        distribuidores : action.payload,
+      };
+
+    case 'NEW_PEDIDO': 
+      return {
+        ...state,
+        pedido : action.payload,
+      }
 
 
     default:

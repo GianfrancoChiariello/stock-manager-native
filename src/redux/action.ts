@@ -227,17 +227,32 @@ export const addNewGusto = async (props: any) => {
     try {
     
       const perrosRef = db.collection('productos').doc(animal);
-      perrosRef.update({
-        [ `${empaque}.${pesoEmpaque}.${etapaEmpaque}.${newGusto}` ]: {
-          cantidad: parseInt(newCantidad),
-          nombre: newNombre,
-          precio: parseInt(newPrecio),
-          precio_kg: parseInt(newPrecioKg),
-          total_kg: parseInt(newCantidad) * parseInt(pesoNums),
-        }
-      }).then(() => {
+      
+      
+      if (newPrecioKg) {
+        perrosRef.update({
+          [ `${empaque}.${pesoEmpaque}.${etapaEmpaque}.${newGusto}` ]: {
+            cantidad: parseInt(newCantidad),
+            nombre: newNombre,
+            precio: parseInt(newPrecio),
+            precio_kg: parseInt(newPrecioKg),
+            total_kg: parseInt(newCantidad) * parseInt(pesoNums),
+          }
+      } ).then(() => {
         console.log("New gusto added successfully!");
       });
+      } else {
+        perrosRef.update({
+          [ `${empaque}.${pesoEmpaque}.${etapaEmpaque}.${newGusto}` ]: {
+            cantidad: parseInt(newCantidad),
+            nombre: newNombre,
+            precio: parseInt(newPrecio),
+            total_kg: parseInt(newCantidad) * parseInt(pesoNums),
+          }
+      } ).then(() => {
+        console.log("New gusto added successfully!");
+      })
+      }
 
     
     } catch (e: any) {
@@ -276,10 +291,10 @@ export const addVentas = async (props: any) => {
           productos.forEach((item: any) => {
 
 
-          const perrosRef = db.collection('productos').doc(item.mascota);
+            const pesot = parseInt(item.peso.replace(/[a-zA-Z]/g, ""))
+            const perrosRef = db.collection('productos').doc(item.mascota);
 
           if (item.cantidad_unitaria) {
-            const pesot = parseInt(item.peso.replace(/[a-zA-Z]/g, ""))
             const pesoTotalDescount = (pesot * item.cantidad_unitaria) / 1000
 
           console.log(item.mascota,item.empaque,item.peso,item.etapa,item.producto, 'cantidad', item.cantidad_unitaria)
@@ -292,9 +307,7 @@ export const addVentas = async (props: any) => {
             perrosRef.update({
               [ `${item.empaque}.${item.peso}.${item.etapa}.${item.producto}.${'total_kg'}`]: firebase.firestore.FieldValue.increment(   -parseFloat(pesoTotalDescount.toFixed(2))),
             })
-          } else {
-            const pesot = parseInt(item.peso.replace(/[a-zA-Z]/g, ""))
-            
+          } else {            
             perrosRef.update({
               [ `${item.empaque}.${item.peso}.${item.etapa}.${item.producto}.${'total_kg'}`]: firebase.firestore.FieldValue.increment(- ( pesot * item.cantidad_kgs )),
             })
@@ -376,3 +389,77 @@ export const addVentas = async (props: any) => {
   };
 
 
+export const addDistribuidor = async (props: any) => {
+
+  const {name, email, address, phone, zone, status, category} = props;
+  
+  
+  return async function (dispatch: any) {
+    try {
+      const docRef = await addDoc(collection(db, "proveedores"), {
+        categoria: category || "Sin categoria",
+        correo: email || "Sin correo",
+        direccion: address || "Sin direccion",
+        nombre: name || "Sin nombre",
+        status: status || true,
+        telefono: phone || "Sin telefono",
+        zona: zone || "Sin zona",
+      });
+      console.log("Document written with ID: ", docRef.id);
+    } catch (e: any) {
+      console.log(e);
+    }
+  };
+};
+
+export const getDistribuidores = async () => {
+  return async function (dispatch: any) {
+    try {
+      
+      const querySnapshot = await getDocs(collection(db, "proveedores"));
+      const distribuidores = querySnapshot.docs.map((doc) => {
+        return {
+          id: doc.id,
+          ...doc.data(),
+        };
+      });
+      
+      
+      return dispatch({
+        type: 'GET_DISTRIBUIDORES',
+        payload: distribuidores,
+      });
+    } catch (e: any) {
+      console.log(e);
+    }
+  };
+};
+
+export const deleteDistribuidor = async (id: any) => {
+  return async function (dispatch: any) {
+    try {
+      await deleteDoc(doc(db, "proveedores", id));
+    
+      const data2 = await getDistribuidores();
+      dispatch(data2);
+    
+    } catch (e: any) {
+      console.log(e);
+    }
+  };
+};
+
+export const newPedido = async (props: any) => {
+  return async function (dispatch: any) {
+    try {
+      
+      return dispatch({
+        type: 'NEW_PEDIDO',
+        payload: props,
+      });
+
+    } catch (e: any) {
+      console.log(e);
+    }
+  };
+};
