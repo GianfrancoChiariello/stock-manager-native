@@ -1,9 +1,6 @@
 import {
   //Ramas principales
-
   STOCK,
-
-
 } from "./const";
 
 
@@ -34,7 +31,7 @@ import {
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDITobjCpSsnbXMVlgsIBH9ExfmahnLfvI",
+  apiKey: process.env.NEXT_PUBLIC_API_KEY as string, 
   authDomain: "animalitos-56bab.firebaseapp.com",
   projectId: "animalitos-56bab",
   storageBucket: "animalitos-56bab.appspot.com",
